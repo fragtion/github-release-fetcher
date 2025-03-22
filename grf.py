@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Git Release Fetcher v1.1b
-Author: Dimitri Pappas
+Author: Dimitri Pappas <https://github.com/fragtion>
 License: MIT
 
 Retrieves a list of file assets for a given GitHub repo release and optionally downloads them.
@@ -151,7 +151,7 @@ def filter_assets(assets, include=None, exclude=None):
 
 def main():
     parser = argparse.ArgumentParser(
-        description=f"{PROGRAM_NAME} {VERSION} by Dimitri Pappas",
+        description=f"{PROGRAM_NAME} {VERSION} by Dimitri Pappas <https://github.com/fragtion>",
         formatter_class=argparse.RawTextHelpFormatter,
     )
     parser.add_argument("url", help="GitHub repository URL or API URL")
