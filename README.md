@@ -44,7 +44,7 @@ It supports filtering files using `--include` and `--exclude`, resuming interrup
 `python3 grf.py https://github.com/owner/repo --download`
 
 #### Specify a Release:
-`python3 grf.py https://github.com/owner/repo --release nightly`
+`python3 grf.py https://github.com/owner/repo --release nightly`, or `https://github.com/owner/repo/releases/tag/nightly`
 
 #### Download to a Specific Directory:
 `python3 grf.py https://github.com/owner/repo --download --output /path/to/directory`
