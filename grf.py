@@ -111,7 +111,7 @@ def fetch_release_data(repo_url, release_tag=None):
             sys.exit(1)
         owner, repo = parts[0], parts[1]
         
-        # Check if the URL is a release tag URL (e.g., https://github.com/owner/repo/releases/tag/7.17)
+        # Check if the URL is a release tag URL (e.g., https://github.com/owner/repo/releases/tag/nightly)
         if "releases/tag/" in repo_url:
             url_release_tag = repo_url.split("releases/tag/")[-1].strip("/")
             if release_tag and release_tag != url_release_tag:
@@ -155,7 +155,7 @@ def main():
         formatter_class=argparse.RawTextHelpFormatter,
     )
     parser.add_argument("url", help="GitHub repository URL or API URL")
-    parser.add_argument("-r", "--release", help="Specific release tag (e.g., 7.18.1)")
+    parser.add_argument("-r", "--release", help="Specific release tag (e.g., nightly)")
     parser.add_argument("-d", "--download", action="store_true", help="Download release files")
     parser.add_argument("-o", "--output", default=".", help="Output directory for downloaded files")
     parser.add_argument("-i", "--include", nargs="+", help="Only download these files")
