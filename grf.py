@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Github Release Fetcher v1.0b
+Git Release Fetcher v1.1b
 Author: Dimitri Pappas
 License: MIT
 
-Retrieves a list of files/assets for a given GitHub repo release, and optionally download them.
-If a specific release is not provided in the URL, then the latest release will be selected.
-Supports filtering with --include and --exclude, resumes interrupted downloads, and compares the 
-downloaded file sizes with the release manifest as a simple sanity check.
+Retrieves a list of file assets for a given GitHub repo release and optionally downloads them.
+If a specific release is not provided, the script defaults to the latest release.
+Supports filtering with --include and --exclude, resuming interrupted downloads, and verifies 
+downloaded file sizes by comparing with the release manifest as a simple sanity check.
 """
 
 import os
@@ -18,7 +18,7 @@ import argparse
 import urllib.request
 from urllib.error import HTTPError, URLError
 
-VERSION = "v1.0b"
+VERSION = "v1.1b"
 PROGRAM_NAME = "Github Release Fetcher"
 
 def format_size(size):
@@ -110,6 +110,14 @@ def fetch_release_data(repo_url, release_tag=None):
             print("Invalid GitHub repository URL.")
             sys.exit(1)
         owner, repo = parts[0], parts[1]
+        
+        # Check if the URL is a release tag URL (e.g., https://github.com/owner/repo/releases/tag/7.17)
+        if "releases/tag/" in repo_url:
+            url_release_tag = repo_url.split("releases/tag/")[-1].strip("/")
+            if release_tag and release_tag != url_release_tag:
+                print(f"Error: Conflicting release tags. URL specifies '{url_release_tag}', but --release specifies '{release_tag}'.")
+                sys.exit(1)
+            release_tag = url_release_tag
     else:
         print("Unsupported URL format. Please provide a GitHub repository or API URL.")
         sys.exit(1)
