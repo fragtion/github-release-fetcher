@@ -45,7 +45,7 @@ def download_file_with_progress(url, target_path, expected_size=None):
         if os.path.exists(target_path):
             existing_size = os.path.getsize(target_path)
             if expected_size and existing_size == expected_size:
-                print(f"File already exists and matches expected size: {target_path}")
+                print(f"File already exists and matches expected size: \"{target_path}\"")
                 return
             headers = {"Range": f"bytes={existing_size}-"}
             req = urllib.request.Request(url, headers=headers)
@@ -86,12 +86,12 @@ def download_file_with_progress(url, target_path, expected_size=None):
 
         # Verify file size
         if expected_size and os.path.getsize(target_path) != expected_size:
-            print(f"Error: File size mismatch for {target_path}")
+            print(f"Error: File size mismatch for \"{target_path}\"")
         else:
-            print(f"Done: {target_path}")
+            print(f"Done: \"{target_path}\"")
 
     except (HTTPError, URLError) as e:
-        print(f"Error: Failed to download {target_path} - {e}")
+        print(f"Error: Failed to download \"{target_path}\" - {e}")
 
 def fetch_release_data(repo_url, release_tag=None):
     """Fetch release data from GitHub API."""
@@ -180,7 +180,7 @@ def main():
     if args.download:
         output_dir = os.path.join(args.output, release_tag)
         os.makedirs(output_dir, exist_ok=True)
-        print(f"\nDownloading files to: {output_dir}")
+        print(f"\nDownloading files to: \"{output_dir}\"")
 
         for asset in assets:
             file_url = asset["browser_download_url"]
